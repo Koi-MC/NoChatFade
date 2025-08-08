@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "nochatfade",
+  "version": "${mod_version}",
+  "name": "No Chat Fade",
+  "description": "Prevents chat from fading out, keeping it on screen",
+  "authors": ["Koi_Pond"],
+  "contact": {
+    "sources": "https://github.com/Koi-MC"
+  },
+  "license": "All Rights Reserved",
+  "icon": "assets/nochatfade/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "koi.pond.nochatfade.NochatfadeClient"
+    ]
+  },
+  "mixins": [
+      "nochatfade.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
