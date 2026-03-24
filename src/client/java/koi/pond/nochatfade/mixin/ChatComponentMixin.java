@@ -1,20 +1,20 @@
 package koi.pond.nochatfade.mixin;
 
-import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.gui.hud.ChatHud.OpacityRule;
+import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.client.gui.components.ChatComponent.AlphaCalculator;
 //import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ChatHud.OpacityRule.class)
-public interface ChatHudMixin {
+@Mixin(ChatComponent.AlphaCalculator.class)
+public interface ChatComponentMixin {
     /**
      * Disables any chat fading behavior
      */
     @Inject(method = "timeBased", at = @At("HEAD"), cancellable = true)
-    private static void timeBased(int currentTick, CallbackInfoReturnable<OpacityRule> cir) {
+    private static void timeBased(int currentTick, CallbackInfoReturnable<AlphaCalculator> cir) {
         /* Vanilla behavior
         return (line) -> {
             int j = currentTick - line.addedTime();
