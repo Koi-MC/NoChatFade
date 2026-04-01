@@ -13,10 +13,14 @@ base {
 loom {
     splitEnvironmentSourceSets()
 
+    SourceSetContainer allSourceSets = project.extensions.getByType(SourceSetContainer)
+    SourceSet mainSourceSet = allSourceSets.named("main").get()
+    SourceSet clientSourceSet = allSourceSets.named("client").get()
+
     mods {
         "nochatfade" {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
+            sourceSet mainSourceSet
+            sourceSet clientSourceSet
         }
     }
 
@@ -84,9 +88,13 @@ java {
     //withSourcesJar()
 }
 
+def moduleArtifactId = "${project.archives_base_name}"
+SoftwareComponentContainer softwareComponents = project.components
+SoftwareComponent javaComponent = softwareComponents.named("java").get()
+
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
+        rename { "${it}_${moduleArtifactId}" }
     }
 }
 
@@ -94,8 +102,8 @@ jar {
 publishing {
     publications {
         create("mavenJava", MavenPublication) {
-            artifactId = project.archives_base_name
-            from components.java
+            artifactId = moduleArtifactId
+            from javaComponent
         }
     }
 
