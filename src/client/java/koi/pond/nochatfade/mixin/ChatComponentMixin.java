@@ -14,7 +14,7 @@ public interface ChatComponentMixin {
      * Disables any chat fading behavior
      */
     @Inject(method = "timeBased", at = @At("HEAD"), cancellable = true)
-    private static void timeBased(int currentTick, CallbackInfoReturnable<AlphaCalculator> cir) {
+    private static void timeBased(int currentTickTime, CallbackInfoReturnable<AlphaCalculator> cir) {
         /* Vanilla behavior
         return (line) -> {
             int j = currentTick - line.addedTime();
